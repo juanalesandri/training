@@ -1,4 +1,19 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ContentChild,
+  DoCheck,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,7 +21,10 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
   styleUrls: ['./server-element.component.css']
 })
 export class ServerElementComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+
   @Input('srvElement') element: { type: string, name: string, content: string };
+  @ViewChild('heading', { static: true }) header: ElementRef;
+  @ContentChild('contentParagraph', { static: true }) paragraph: ElementRef;
 
   constructor() {
     console.log('CONSTRUCTOR');
@@ -14,6 +32,8 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
   ngOnInit(): void {
     console.log('NG ON INIT');
+    console.log('Text content:' + this.header.nativeElement.textContent);
+    console.log('Text content paragraph:' + this.paragraph.nativeElement.textContent);
   }
 
   ngOnChanges(changes: SimpleChanges) { //es el unnico que recibe un argumento
@@ -26,6 +46,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
   ngAfterContentInit(): void {
     console.log('NG AFTER CONTENT INIT');
+    console.log('Text content paragraph:' + this.paragraph.nativeElement.textContent);
   }
 
   ngAfterContentChecked(): void {
@@ -34,6 +55,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
   ngAfterViewInit(): void {
     console.log('NG AFTER VIEW INIT');
+    console.log('Text content:' + this.header.nativeElement.textContent);
   }
 
   ngAfterViewChecked(): void {

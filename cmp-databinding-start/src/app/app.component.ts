@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   //serverElements = [{ type: 'server', name: 'Testserver', content: 'Just a test!' }];
   serverElements = [];
+  oddNumbers = [];
+  evenNumbers = [];
 
   onServerAdded(serverData: { serverName: string, serverContent: string }) {
     this.serverElements.push({
@@ -27,5 +29,10 @@ export class AppComponent {
 
   onDestroyFirst() {
     this.serverElements.splice(0, 1);
+  }
+
+  onStart(numberEmited: number) {
+    //console.log(numberEmited);
+    numberEmited % 2 === 0 ? this.evenNumbers.push(numberEmited) : this.oddNumbers.push(numberEmited);
   }
 }
