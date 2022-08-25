@@ -66,4 +66,8 @@ Directivas personalizadas
 		el selector se pone entre corchetes para que podamos usarlo en el html solo poniendo el nombre de la directiva y SIN los corchetes
 		Luego de crear la directiva hay que agregarla al modulo, en el array "declaration"
 	la diretiva tambien se puede crear con ng g d directive_name
+	si el valor que voy a pasar a la directiva como parametro es un string, puedo hacer lo siguiente:
+		<p defaultColor="yellow">Style me with better directive!</p>
+		en lugar de esto
+		<p [defaultColor]="'yellow'">Style me with better directive!</p>
 				
