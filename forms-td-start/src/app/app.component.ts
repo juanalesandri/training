@@ -8,7 +8,9 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   @ViewChild('form') signupForm: NgForm;
+  @ViewChild('taskForm') myTaskForm: NgForm;
   selectQuestion: string = 'pet';
+  subscriptionType: string = 'basic'
   answer: string = '';
   genders: string[] = ['male', 'female'];
   user = {
@@ -19,6 +21,10 @@ export class AppComponent {
     gender: ''
   }
   submitted: boolean = false;
+  submittedTask: boolean = false;
+  passwordTaskSelected: string = '';
+  emailTaskSelected: string = '';
+  subscriptionTaskSelected: string = '';
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -55,5 +61,16 @@ export class AppComponent {
     this.user.gender = this.signupForm.value.gender;
 
     this.signupForm.reset();
+  }
+
+  submitTaskForm() {
+    console.log(this.myTaskForm.value.emailTask);
+    console.log(this.myTaskForm.value.password);
+    console.log(this.myTaskForm.value.subscription);
+    this.passwordTaskSelected = this.myTaskForm.value.password;
+    this.subscriptionTaskSelected = this.myTaskForm.value.subscription;
+    this.emailTaskSelected = this.myTaskForm.value.emailTask;
+    this.submittedTask = true;
+    this.myTaskForm.reset();
   }
 }
