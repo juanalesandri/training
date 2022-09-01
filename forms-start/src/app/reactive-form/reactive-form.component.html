@@ -50,8 +50,21 @@
             </form>
         </div>
         <div class="col-xs-6">
-            <h1>Tarea</h1>
-            <div></div>
+            <div>
+                <h1>Tarea</h1>
+                <button class="btn btn-primary" (click)="showDescription()">{{buttonTitle}}</button>
+                <div *ngIf="showStatement">
+                    <h4>Create a Form with the following Controls and Validators</h4>
+                    <p>1) Project name (should not be empty)</p>
+                    <p>2) Mail (should not be empty and valid email)</p>
+                    <p>3) Project Status Dropdown, whith three values: 'Stable', 'Critical', 'Finished</p>
+                    <p>4) Submit Button</p>
+
+                    <span>Add your own Validator which doesn't allow "Test as a Project Name</span>
+                    <span>Also implement that Validator as an async Validator (replace the other one)</span>
+                    <span>Upon submittin the form, simply print the value to the console</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

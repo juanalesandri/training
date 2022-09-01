@@ -11,6 +11,8 @@ export class ReactiveFormComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
   forbiddenUsername = ['juan', 'pedro'];
+  buttonTitle: string = 'Hide statement';
+  showStatement: boolean = true;
 
   constructor() { }
 
@@ -75,6 +77,11 @@ export class ReactiveFormComponent implements OnInit {
         control.value === 'test@test.com' ? resolve({ 'emailIsForbidden': true }) : resolve(null)
       }, 1500)
     })
+  }
+
+  showDescription() {
+    this.showStatement = !this.showStatement;
+    this.buttonTitle = this.showStatement ? 'Hide statement' : 'Show statement';
   }
 
 }
