@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -9,19 +9,41 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ReactiveFormComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
+  forbiddenUsername = ['juan', 'pedro'];
 
   constructor() { }
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'gender': new FormControl('male')
+      'userData': new FormGroup({
+        'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
+        'email': new FormControl(null, [Validators.required, Validators.email]),
+      }),
+      'gender': new FormControl('male'),
+      'hobbies': new FormArray([])
     })
   }
 
   submitForm() {
     console.log(this.signupForm)
+  }
+
+  addHobby() {
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
+
+  getControls() {
+    return (<FormArray>this.signupForm.get('hobbies')).controls;
+  }
+
+  forbiddenNames(control: FormControl): { [s: string]: boolean } {
+    //console.log('CONTROL VALUE: ', control.value.toLowerCase());
+    //console.log(control);
+    const controlValue = control.value ? control.value.toLowerCase() : '';
+    //console.log('CONTROL VALUE: ', controlValue);
+    return (this.forbiddenUsername.indexOf(controlValue) !== -1) ? { 'nameIsForbidden': true } : null
+
   }
 
 }
