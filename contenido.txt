@@ -1,5 +1,5 @@
 Creacion de nuevo proyecto:
-	ng new proyect_name --no-strict
+	ng new proyect_name --no-strict o ng new proyect_name --strict=false
 		--no-strict desabilita el modo estricto. Si no lo desabilite al crear el proyecto, puedo hacerlo en el archivo tsconfig.json poniendo:
 			strict: false
 Ejecutar el proyecto
