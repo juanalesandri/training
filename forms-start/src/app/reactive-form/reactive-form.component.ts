@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class ReactiveFormComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
+  projectTaskForm: FormGroup;
   forbiddenUsername = ['juan', 'pedro'];
   buttonTitle: string = 'Hide statement';
   showStatement: boolean = true;
@@ -32,6 +33,12 @@ export class ReactiveFormComponent implements OnInit {
     // this.signupForm.statusChanges.subscribe((status) => {
     //   console.log(status);
     // });
+
+    this.projectTaskForm = new FormGroup({
+      'projectname': new FormControl(null, [Validators.required], this.forbiddenProjectName),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'projectstate': new FormControl(null)
+    })
 
     this.signupForm.setValue({
       userData: {
@@ -82,6 +89,18 @@ export class ReactiveFormComponent implements OnInit {
   showDescription() {
     this.showStatement = !this.showStatement;
     this.buttonTitle = this.showStatement ? 'Hide statement' : 'Show statement';
+  }
+
+  forbiddenProjectName(control: FormControl): Promise<any> | Observable<any> {
+    return new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        (control.value).toLowerCase() === 'test' ? resolve({ 'projectNameIsForbidden': true }) : resolve(null)
+      }, 1500)
+    })
+  }
+
+  submitFormTask() {
+    console.log(this.projectTaskForm);
   }
 
 }

@@ -65,6 +65,36 @@
                     <span>Upon submittin the form, simply print the value to the console</span>
                 </div>
             </div>
+            <div>
+                <form [formGroup]="projectTaskForm" (ngSubmit)="submitFormTask()">
+                    <label for="projectname">Project Name</label>
+                    <input type="text" id="projectname" class="form-control" formControlName="projectname">
+                    <span class="help-control"
+                        *ngIf="!projectTaskForm.get('projectname').valid && projectTaskForm.get('projectname').touched"
+                        class="help-block">
+                        <span *ngIf="projectTaskForm.get('projectname').errors['projectNameIsForbidden']">This name is
+                            invalid</span>
+                        <span *ngIf="projectTaskForm.get('projectname').errors['required']">This field is
+                            required</span>
+                    </span>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email">
+                    <span class="help-block"
+                        *ngIf="!projectTaskForm.get('email').valid && projectTaskForm.get('email').touched">Please
+                        enter a valid email</span>
+                    <div class="form-group">
+                        <label for="projectstate">Project State</label>
+                        <select id="projectstate" class="form-control" formControlName="projectstate">
+                            <option value="stable">Stable</option>
+                            <option value="critital">Critical</option>
+                            <option value="finished">Finished</option>
+                        </select>
+                    </div>
+                    <div class="m-t-2">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
