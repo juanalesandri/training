@@ -8,10 +8,11 @@ import { Recipe } from "./recipe.model";
 export class RecipeService {
     recipedChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [
-        new Recipe('A Test Recipe 1', 'This is simply a test 1', 'https://thebrilliantkitchen.com/wp-content/uploads/2022/08/Lamb-Medium-Rare%E2%80%8B%E2%80%8B.jpg', [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]),
-        new Recipe('A Test Recipe 2', 'This is simply a test 2', 'https://thebrilliantkitchen.com/wp-content/uploads/2022/08/Lamb-Medium-Rare%E2%80%8B%E2%80%8B.jpg', [new Ingredient('Buns', 2), new Ingredient('Meat', 27)]),
-    ];
+    // private recipes: Recipe[] = [
+    //     new Recipe('A Test Recipe 1', 'This is simply a test 1', 'https://thebrilliantkitchen.com/wp-content/uploads/2022/08/Lamb-Medium-Rare%E2%80%8B%E2%80%8B.jpg', [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]),
+    //     new Recipe('A Test Recipe 2', 'This is simply a test 2', 'https://thebrilliantkitchen.com/wp-content/uploads/2022/08/Lamb-Medium-Rare%E2%80%8B%E2%80%8B.jpg', [new Ingredient('Buns', 2), new Ingredient('Meat', 27)]),
+    // ];
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) { }
 
@@ -20,6 +21,11 @@ export class RecipeService {
         //estare pasando una referencia a dicha lista y si hago cualquier modificacion sobre dicha lista afuera del servicio, el cambio se vera afectado tambien
         //en el servicio
         return this.recipes.slice();
+    }
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipedChanged.next(this.recipes.slice());
     }
 
     getRecipe(id: number) {
