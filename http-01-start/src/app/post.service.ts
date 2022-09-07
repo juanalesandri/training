@@ -1,17 +1,23 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams, HttpEventType } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Post } from "./post.model";
+
+let searchParams = new HttpParams();
+searchParams = searchParams.append('print', 'pretty');
+searchParams = searchParams.append('custom', 'key');
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
     private urlBase = 'https://curso-angular-36237-default-rtdb.firebaseio.com/';
     error = new Subject<string>();
+
     headers = {
         headers: new HttpHeaders({
             'Custom-Header': 'hola'
-        })
+        }),
+        params: searchParams
     };
 
     constructor(private http: HttpClient) { }
@@ -21,9 +27,14 @@ export class PostService {
     // }
 
     creteNewPost(data: Post) {
-        this.http.post<{ name: string }>(`${this.urlBase}posts.json`, data).subscribe(resp => {
-            return resp;
-        }, error => this.error.next(error.error.error));
+        this.http.post<{ name: string }>(`${this.urlBase}posts.json`, data,
+            {
+                observe: 'response',
+            })
+            .subscribe(resp => {
+                console.log(resp.body)
+                //return resp;
+            }, error => this.error.next(error.error.error));
     }
 
     getPosts() {
@@ -44,6 +55,15 @@ export class PostService {
     }
 
     deletePosts() {
-        return this.http.delete(`${this.urlBase}posts.json`);
+        return this.http.delete(`${this.urlBase}posts.json`,
+            {
+                observe: 'events',
+                responseType: 'text'
+            })
+            .pipe(tap(event => {
+                console.log(event);
+                if (event.type === HttpEventType.Response)
+                    console.log(event.body)
+            }))
     }
 }
