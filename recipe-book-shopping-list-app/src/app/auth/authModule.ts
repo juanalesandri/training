@@ -8,7 +8,7 @@ import { AuthComponent } from "./auth.component";
 @NgModule({
     declarations: [AuthComponent],
     imports: [CommonModule, FormsModule, SharedModule, RouterModule.forChild([
-        { path: 'auth', component: AuthComponent },
+        { path: '', component: AuthComponent },
     ])]
 })
 export class AuthModule { }

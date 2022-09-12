@@ -21,10 +21,10 @@ import { AuthModule } from './auth/authModule';
     AppRoutingModule,
     HttpClientModule,
     //RecipesModule, se elimina de aca ya que implemente lazy loading ver app-routing y recipes-routing
-    ShoppingListModule,
+    //ShoppingListModule, se elimina de aca ya que implemente lazy loading. ver modulo del componente
     SharedModule,
     CoreModule,
-    AuthModule,
+    //AuthModule, se elimina de aca ya que implemente lazy loading. Ver modulo del componente
   ],
   bootstrap: [AppComponent]
 })
