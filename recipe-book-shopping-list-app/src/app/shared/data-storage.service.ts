@@ -14,6 +14,7 @@ export class DataStorageService {
 
     storeRecipe() {
         const recipes = this.recipeService.getRecipes();
+        console.log('guardar recetas', recipes);
         this.http.put(`${this.urlBase}recipes.json`, recipes).subscribe(resp => {
             console.log(resp);
         });

@@ -7,7 +7,8 @@ const appRoutes: Routes = [
     //https://stackoverflow.com/questions/70313032/type-string-is-not-assignable-to-type-loadchildrencallback
     { path: 'recipes', loadChildren: () => import('./recipes/recipes.module').then(x => x.RecipesModule) },
     { path: 'shopping-list', loadChildren: () => import('./shopping-list/shopping-list.module').then(x => x.ShoppingListModule) },
-    { path: 'auth', loadChildren: () => import('./auth/authModule').then(x => x.AuthModule) }
+    { path: 'auth', loadChildren: () => import('./auth/authModule').then(x => x.AuthModule) },
+    { path: 'supermarkets', loadChildren: () => import('./supermarkets/supermarket.module').then(x => x.SupermarketModule) }
 ]
 
 @NgModule({

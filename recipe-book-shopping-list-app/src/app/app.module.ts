@@ -10,6 +10,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './auth/authModule';
+import { SupermarketModule } from './supermarkets/supermarket.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/authModule';
     SharedModule,
     CoreModule,
     //AuthModule, se elimina de aca ya que implemente lazy loading. Ver modulo del componente
+    //SupermarketModule, //se elimina de aca ya que implemente lazy loading. Ver modulo del componente
   ],
   bootstrap: [AppComponent]
 })
