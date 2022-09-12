@@ -20,7 +20,7 @@ import { AuthModule } from './auth/authModule';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RecipesModule,
+    //RecipesModule, se elimina de aca ya que implemente lazy loading ver app-routing y recipes-routing
     ShoppingListModule,
     SharedModule,
     CoreModule,
