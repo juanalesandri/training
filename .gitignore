@@ -2,12 +2,7 @@ cmp-databinding-start/node_modules
 my-first-app/node_modules
 
 recipe-book-shopping-list-app/node_modules
-recipe-book-shopping-list-app/src/app/app.modules.ts
-recipe-book-shopping-list-app/src/app/supermarkets
-recipe-book-shopping-list-app/src/app/header
-recipe-book-shopping-list-app/dist/recipe-book-shopping-list-app
-recipe-book-shopping-list-app/src/app/app-routing.modules.ts
-
+recipe-book-shopping-list-universal-app/node_modules
 directives-start/node_modules
 services-start/node_modules
 services-assignment/node_modules
