@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
@@ -38,7 +39,7 @@ export class AuthService {
     // }
 
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId) { }
 
     signUp(email: string, password: string) {
         const registerInfo = {
@@ -67,12 +68,27 @@ export class AuthService {
     }
 
     autoLogin() {
-        const userData: {
+
+        // const userData: {
+        //     email: string,
+        //     id: string,
+        //     _token: string,
+        //     _tokenExpirationDate: string
+        // } = JSON.parse(localStorage.getItem('userData'));
+
+        //universal-i
+        let userData: {
             email: string,
             id: string,
             _token: string,
             _tokenExpirationDate: string
-        } = JSON.parse(localStorage.getItem('userData'));
+        };
+
+        if (isPlatformBrowser(this.platformId)) {
+            userData = JSON.parse(localStorage.getItem('userData'));
+        }
+        //universal-f
+
         if (!userData) return;
         const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
         if (loadedUser.token) {
@@ -84,7 +100,11 @@ export class AuthService {
 
     logout() {
         this.user.next(null);
-        localStorage.removeItem('userData');
+        //localStorage.removeItem('userData');
+        //universal-i
+        if (isPlatformBrowser(this.platformId))
+            localStorage.removeItem('userData');
+        //universal-f
         this.router.navigate(['/auth']);
         if (this.tokenExpirationTimer) clearTimeout(this.tokenExpirationTimer);
         this.tokenExpirationTimer = null;
@@ -100,7 +120,11 @@ export class AuthService {
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(email, localId, token, expirationDate);
         this.user.next(user);
-        localStorage.setItem('userData', JSON.stringify(user));
+        //localStorage.setItem('userData', JSON.stringify(user));
+        //universal-i
+        if (isPlatformBrowser(this.platformId))
+            localStorage.setItem('userData', JSON.stringify(user));
+        //universal-f
         this.autoLogout(expiresIn * 1000);
     }
 
