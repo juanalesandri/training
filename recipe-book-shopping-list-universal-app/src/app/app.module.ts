@@ -17,7 +17,7 @@ import { AuthModule } from './auth/authModule';
     HeaderComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     //RecipesModule, se elimina de aca ya que implemente lazy loading ver app-routing y recipes-routing

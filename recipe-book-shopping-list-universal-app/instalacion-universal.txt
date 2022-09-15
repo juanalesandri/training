@@ -1,0 +1,12 @@
+Ejecutanto el comando ng add @nguniversal/express-engine me daba errores en la instalacion.
+Para solucionarlo ejecute:
+    1) npm i @nguniversal/express-engine --force
+    y despues:
+    2) ng add @nguniversal/express-engine --force
+    3) si en el archivo app.server.module.ts no esta importado "ModuleMapLoaderModule, debo instalarlo con:
+        npm i --save @nguniversal/module-map-ngfactory-loader
+
+        como esto me dio error, lo instale con:
+        npm i --save @nguniversal/module-map-ngfactory-loader --force
+        luego agregar ModuleMapLoaderModule a las importaciones
+        Todo esto es para que funcione lazy loading
